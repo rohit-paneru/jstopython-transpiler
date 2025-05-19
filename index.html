@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript to Python Converter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>JavaScript to Python Converter</h1>
+      <div class="converter-container">
+        <div class="code-section">
+          <h2>JavaScript Code</h2>
+          <textarea
+            id="js-code"
+            placeholder="Paste your JavaScript code here..."
+          ></textarea>
+          <div class="buttons">
+            <button id="convert-btn">Convert to Python</button>
+            <button id="clear-btn">Clear</button>
+          </div>
+        </div>
+        <div class="code-section">
+          <h2>Python Code</h2>
+          <textarea
+            id="py-code"
+            placeholder="Python code will appear here..."
+            readonly
+          ></textarea>
+          <div class="buttons">
+            <button id="copy-btn">Copy to Clipboard</button>
+            <button id="download-btn">Download as .py</button>
+          </div>
+        </div>
+      </div>
+      <div class="status-section">
+        <div id="status-message"></div>
+        <div id="conversion-info"></div>
+      </div>
+      <div class="info-section">
+        <h3>Supported Features</h3>
+        <ul>
+          <li>Variable declarations</li>
+          <li>Function definitions</li>
+          <li>Class definitions</li>
+          <li>Loops (for, while)</li>
+          <li>Conditionals (if/else)</li>
+          <li>Console.log statements</li>
+          <li>Basic string operations</li>
+          <li>Arrays and basic operations</li>
+        </ul>
+        <h3>Limitations</h3>
+        <ul>
+          <li>Complex JavaScript constructs might not convert correctly</li>
+          <li>Arrow functions are not fully supported</li>
+          <li>Some JavaScript features have no direct Python equivalent</li>
+          <li>Manual adjustments might be needed for certain code patterns</li>
+        </ul>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
