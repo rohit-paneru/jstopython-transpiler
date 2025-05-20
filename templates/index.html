@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSTOP - JavaScript to Python Transpiler</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>JSTOP</h1>
+        <p>JavaScript to Python Transpiler</p>
+      </header>
+
+      <div class="editor-container">
+        <div class="editor-pane">
+          <h2>JavaScript Input</h2>
+          <textarea
+            id="js-input"
+            spellcheck="false"
+            aria-label="JavaScript Code Input Area"
+            placeholder="// Paste your JavaScript code here...
+let message = 'Hello, World!';
+console.log(message);"
+          ></textarea>
+        </div>
+        <div class="editor-pane">
+          <h2>Python Output</h2>
+          <textarea
+            id="python-output"
+            spellcheck="false"
+            readonly
+            aria-label="Python Code Output Area"
+            placeholder="# Transpiled Python code will appear here..."
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="transpile-btn" aria-label="Transpile JavaScript to Python">
+          Transpile <span class="shortcut">(Ctrl+Enter)</span>
+        </button>
+        <button id="clear-js-btn" aria-label="Clear JavaScript Input">
+          Clear JS
+        </button>
+        <button id="copy-py-btn" aria-label="Copy Python Output">
+          Copy Python
+        </button>
+      </div>
+
+      <div id="status-message" role="status" aria-live="polite">Ready.</div>
+
+      <footer>
+        <p>A basic JS to Python transpiler example.</p>
+      </footer>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+  </body>
+</html>

@@ -1,16 +1,16 @@
 @echo off
-echo Starting JavaScript to Python Converter UI...
+title JSTOP Transpiler Server
+echo Starting JSTOP Web UI (Python Flask Server)...
 echo.
-echo Please wait while the server starts...
+echo The Flask server will attempt to run on http://127.0.0.1:5000/
+echo (or http://YOUR_LOCAL_IP:5000/ if accessed from another device on network).
+echo Open this address in your web browser once the server messages appear.
 echo.
-echo Once the server is running, open your web browser and go to:
-echo http://localhost:8000
+echo Press CTRL+C in this window to stop the server.
 echo.
-echo Press Ctrl+C to stop the server when you're done.
-echo.
+
 python server.py
 
-REM If the server exits, show a message
 echo.
-echo Server stopped.
+echo Flask server has been stopped.
 pause
