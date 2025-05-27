@@ -8,7 +8,7 @@ _\*\*jstopython-transpiler_\*\* is a tool that converts JavaScript code to Pytho
 
 ## Features
 
-- **JavaScript to Python Conversion:** Transpile JavaScript code into Python automatically
+- **JavaScript to Python Conversion:** Transpile JavaScript code into Python automatically 
 - **Web UI:** Clean, responsive interface for entering code and viewing results
 - **Real-time Conversion:** Instantly see Python output as you write JavaScript
 - **AST-based Transformation:** Uses Babel parser to create accurate Abstract Syntax Tree transformations
