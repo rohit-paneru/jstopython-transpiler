@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const copyPyBtn = document.getElementById("copy-py-btn");
   const statusMessage = document.getElementById("status-message");
 
-  // Set initial example JavaScript in the input area
+  //  initial example JavaScript in the input area
   jsInput.value = `// Example JavaScript
 let myVariable = 42;
 const greeting = \`Hello, \${'World'}!\`; // Template literal
@@ -79,7 +79,6 @@ if (true && (myVariable < 100 || false)) {
       );
 
       if (!response.ok && response.status !== 200) {
-        // 200 is used even for app-level errors with JSON body
         // Handle HTTP errors (like 500, 400 from request validation if not JSON response)
         throw new Error(
           `Server responded with status: ${response.status}. Response body: ${responseText}`

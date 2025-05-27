@@ -199,6 +199,40 @@ class ASTNodeTransformer:
             py_loop_lines.append(f"while {test_code_py}:")
             py_loop_lines.append(indented_while_body_py)
             return "\n".join(py_loop_lines)
+            
+        elif node_type == "ForOfStatement":
+            # Handle for...of loops (JavaScript's iteration over iterable objects)
+            left_node = node.get("left")
+            right_node = node.get("right")
+            body_node = node.get("body")
+            
+            # Get the variable name or pattern
+            var_name = ""
+            if left_node.get("type") == "VariableDeclaration":
+                # Extract variable name from declaration
+                declarations = left_node.get("declarations", [])
+                if declarations and len(declarations) > 0:
+                    id_node = declarations[0].get("id")
+                    if id_node and id_node.get("type") == "Identifier":
+                        var_name = self._transform_identifier_name(id_node.get("name", "item"))
+                    else:
+                        var_name = "item"  # Default if we can't extract the name
+                else:
+                    var_name = "item"  # Default if no declarations
+            elif left_node.get("type") == "Identifier":
+                var_name = self._transform_identifier_name(left_node.get("name", "item"))
+            else:
+                var_name = "item"  # Default fallback
+            
+            # Transform the iterable expression
+            iterable_py = self.transform_node(right_node)
+            
+            # Transform the loop body
+            body_py = self.transform_node(body_node)
+            indented_body_py = self._indent_block(body_py)
+            
+            # Create Python for loop
+            return f"for {var_name} in {iterable_py}:\n{indented_body_py}"
 
         elif node_type == "BlockStatement":
             py_block_statements = [self.transform_node(stmt) for stmt in node.get("body", [])]
@@ -288,6 +322,24 @@ class ASTNodeTransformer:
                 return f"{py_left_operand} = ({py_left_operand} >> {py_right_operand}) if {py_left_operand} >= 0 else ((({py_left_operand} & 0xFFFFFFFF) >> {py_right_operand}))"
             py_operator = js_operator 
             return f"{py_left_operand} {py_operator} {py_right_operand}"
+            
+        elif node_type == "LogicalExpression":
+            py_left = self.transform_node(node.get("left"))
+            js_operator = node.get("operator")
+            py_right = self.transform_node(node.get("right"))
+            
+            # Map JavaScript logical operators to Python
+            if js_operator == "&&":
+                return f"{py_left} and {py_right}"
+            elif js_operator == "||":
+                return f"{py_left} or {py_right}"
+            elif js_operator == "??":
+                # Nullish coalescing operator - use Python's or with None check
+                # We need to use a variable name that won't conflict with user code
+                var_name = "_tmp_nullish_check"
+                return f"(lambda {var_name}={py_left}: {var_name} if {var_name} is not None else {py_right})()"
+            else:
+                return f"# UNKNOWN_LOGICAL_OPERATOR: {js_operator} # ({py_left}, {py_right})"
 
         else:
             return f"# ASTNODE_TRANSFORMER_UNSUPPORTED_TYPE: {node_type}"
